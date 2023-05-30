@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany} from "typeorm"
 
-import {Usuario} from "./Usuario";
+import { Historico } from "./Historico"
 
 @Entity()
 export class Regra {
@@ -9,14 +9,14 @@ export class Regra {
     id: number
 
     @Column()
-    nome: string
+    versao: string
 
     @Column()
-    compartilhaDados: boolean
+    termo1: string
 
     @Column()
-    notificacoes: boolean
+    termo2: string
 
-    @OneToMany(() => Usuario, (usuario) => usuario.regra)
-    usuarios: Usuario[]
+    @OneToMany(() => Historico, (historico) => historico.regra)
+    historicos: Historico[]
 }

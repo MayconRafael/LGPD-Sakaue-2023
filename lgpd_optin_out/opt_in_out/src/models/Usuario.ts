@@ -23,7 +23,7 @@ export class Usuario {
     @OneToMany(() => Historico, (historico) => historico.usuario)
     historicos: Historico[]
 
-    @ManyToOne(() => Regra, (regra) => regra.usuarios, {nullable: false})
-    @JoinColumn()
-    regra: Regra   
+    // @ManyToOne(() => Regra, (regra) => regra.usuarios, {nullable: false})
+    // @JoinColumn()
+    // regra: Regra   
 }
