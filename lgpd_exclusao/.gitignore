@@ -5,3 +5,4 @@ node_packages/
 .gradle/
 *.jar
 *.pyc
+node_modules/
