@@ -49,7 +49,7 @@ export class Service{
     }
 
     async listAllHistorico(){
-       let list = await historicoRepository.find();
+       let list = await historicoRepository.find({relations: ['usuario', 'regra']});
        return list;
     }     
 
@@ -68,10 +68,16 @@ export class Service{
     }
 
     async listHistoricoPorUsuario(id_usuario){ 
-        let list = await historicoRepository.findBy({
-            usuario: Equal(id_usuario),
+        let list = await historicoRepository.find({
+            where: {
+                usuario: Equal(id_usuario),
+            },
+            relations: {
+                regra: true,
+                usuario: true
+            },            
         })
-        return list;       
+        return list; 
     }
 
 

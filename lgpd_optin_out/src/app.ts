@@ -148,7 +148,7 @@ async function listHistorico(req, res){
     let historico = await service.listAllHistorico();  
     let historico_list = JSON.stringify(historico);
     res.setHeader('Content-Type', 'application/json');
-    res.end(historico_list);     
+    res.send(historico_list);     
 }
 
 async function addHistorico(req,res){
@@ -313,23 +313,30 @@ async function listUsuarioAceita(req, res){
 
 async function listAceita(req, res){
 
-    // var ids = new Array(1, 4, 9); 
+    let ids = [];
 
-    // let usuarios = await service.listAllUsuarios();
-    // usuarios.map(async (item, index) => {
-    //     let id_historico = item.id;
-    //     let ultHistorico = await service.listHistoricoPorUsuario(id_historico);
-    //     let tamanho = ultHistorico.length;
-    //     console.log(tamanho)
-    //     ultHistorico.map((item, index) => {
-    //         if(tamanho == index+1){
-    //             ids.push(2); 
-    //             console.log(ids)
-    //         }
-    //     })
+    let usuarios = await service.listAllUsuarios();
+    let tamanhoUsuarios = usuarios.length; 
+    usuarios.map(async (item, index) => {
+        let id_historico = item.id;
+        let ultHistorico = await service.listHistoricoPorUsuario(id_historico);
+        let tamanho = ultHistorico.length;
+        // console.log(tamanho)
+        let cont = index+1;
+        ultHistorico.map((item, index) => {
+            if(tamanho == index+1 && item.aceitaSms == true){
+                ids.push(item.usuario.id)
+                console.log(ids)
+                // if (tamanhoUsuarios == cont){
+                //     res.send(ids)
+                // }
+            }
+        })
+        
+    })  
 
-    //     let tamanhoUsuario = usuarios.length; 
-    // })
+    res.send("Os ids de quem aceitou está no console.log")
+
 }
 
 function listenHandler(){
