@@ -310,24 +310,26 @@ async function listUsuarioAceita(req, res){
 
 }
 
+
 async function listAceita(req, res){
 
-    // let a = [{"":""}, {"":""}];
+    // var ids = new Array(1, 4, 9); 
 
     // let usuarios = await service.listAllUsuarios();
-    // let tamanho = usuarios.length;
-    // console.log(tamanho)
     // usuarios.map(async (item, index) => {
     //     let id_historico = item.id;
     //     let ultHistorico = await service.listHistoricoPorUsuario(id_historico);
+    //     let tamanho = ultHistorico.length;
+    //     console.log(tamanho)
     //     ultHistorico.map((item, index) => {
     //         if(tamanho == index+1){
-    //             a.push(item);
+    //             ids.push(2); 
+    //             console.log(ids)
     //         }
     //     })
-    // })
-    // console.log(a);
 
+    //     let tamanhoUsuario = usuarios.length; 
+    // })
 }
 
 function listenHandler(){
