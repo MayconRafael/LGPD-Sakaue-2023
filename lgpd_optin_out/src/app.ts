@@ -55,22 +55,14 @@ app.get('/listHistoricoUsuario', listHistoricoUsuario);
 app.get('/listRegra', listRegra);
 app.post('/addRegra', addRegra);
 
-app.get('/teste', teste)
+app.get('/listUsuarioAceita', listUsuarioAceita)
+app.get('/listAceita', listAceita)
+
 
 /* Execução do servidor */
 app.listen(port, listenHandler);
 
 //Usuário
-
-async function teste(req, res){ 
-    let usuarios = await service.listAllUsuarios();
-    console.log(usuarios)
-    if(usuarios.length != 0){
-        res.send("EXISTE ALGUEM")      
-    } else {
-        res.send("NAO EXISTE")
-    } 
-}
 
 async function listUsuario(req, res){ 
     console.log("Requisição de listagem recebida."); 
@@ -300,6 +292,43 @@ async function addRegra(req,res){
     }
 }
 
+async function listUsuarioAceita(req, res){
+
+    let a = false;
+
+    let id_historico = req.body.usuarioId;
+    let ultHistorico = await service.listHistoricoPorUsuario(id_historico);
+    ultHistorico.map((item, index) => {
+        a = item.aceitaSms
+    })
+
+    if (a != false){
+        res.send("Pode enviar SMS");
+    } else {
+        res.send("Não pode enviar SMS");
+    }
+
+}
+
+async function listAceita(req, res){
+
+    // let a = [{"":""}, {"":""}];
+
+    // let usuarios = await service.listAllUsuarios();
+    // let tamanho = usuarios.length;
+    // console.log(tamanho)
+    // usuarios.map(async (item, index) => {
+    //     let id_historico = item.id;
+    //     let ultHistorico = await service.listHistoricoPorUsuario(id_historico);
+    //     ultHistorico.map((item, index) => {
+    //         if(tamanho == index+1){
+    //             a.push(item);
+    //         }
+    //     })
+    // })
+    // console.log(a);
+
+}
 
 function listenHandler(){
     console.log(`Escutando na porta ${port}!`);
