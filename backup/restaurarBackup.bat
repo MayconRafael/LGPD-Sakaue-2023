@@ -1,0 +1,1 @@
+mariadb -u root -p backup < bkp_exclusao.sql

@@ -1,0 +1,1 @@
+mysqldump -u root -p exclusao --column-statistics=0 > bkp_exclusao.sql
