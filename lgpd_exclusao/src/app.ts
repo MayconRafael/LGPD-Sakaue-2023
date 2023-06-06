@@ -54,6 +54,7 @@ app.get('/listComprasUsuario', listComprasUsuario);
 app.get('/listLink', listLink);
 app.post('/addLink', addLink);
 
+app.get('/listExcluido', listExcluido)
 
 
 /* Execução do servidor */
@@ -108,10 +109,14 @@ async function deleteUsuario(req, res){
     let existe = await service.listUsuarioPorId(id_usuario);
 
     if (existe == null){
-        res.end("Usuário não existe!");
+        res.send("Usuário não existe!");
     } else {    
         await service.deleteUsuario(id_usuario); 
-        console.log("Usuário deletado com sucesso!");
+        let novo_excluido = {
+            "idExcluido": id_usuario
+        }
+        await service.insertExcluido(novo_excluido);
+        res.send("Usuário deletado com sucesso!");
     }      
 }
 
@@ -193,6 +198,14 @@ async function addLink(req,res){
     let novo_link_i = JSON.stringify(novo_link);
     res.setHeader('Content-Type', 'application/json');
     res.end(novo_link_i);     
+}
+
+async function listExcluido(req, res){
+    console.log("Requisição de listagem recebida."); 
+    let excluido = await service.listAllExcluidos();  
+    let excluido_list = JSON.stringify(excluido);
+    res.setHeader('Content-Type', 'application/json');
+    res.end(excluido_list);     
 }
 
 

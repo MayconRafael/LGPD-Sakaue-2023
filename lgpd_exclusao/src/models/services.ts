@@ -3,10 +3,12 @@ import {Compra} from "./Compra";
 import {Usuario} from "./Usuario";
 import {Link} from "./Link";
 import { Equal } from "typeorm";
+import { IDExcluido } from "./IDExcluido";
 
 const compraRepository = MariaDBDataSource.getRepository(Compra)
 const usuarioRepository = MariaDBDataSource.getRepository(Usuario)
 const linkRepository = MariaDBDataSource.getRepository(Link)
+const idexcluidoRepository = MariaDBDataSource.getRepository(IDExcluido)
 
 
 export class Service{    
@@ -90,6 +92,16 @@ export class Service{
             id: Equal(id_link),
         }) 
         return list;       
+    }
+
+    //Services IDExcluido
+    async listAllExcluidos(){
+        let list = await idexcluidoRepository.find();
+        return list;
+    } 
+    
+    async insertExcluido(novo_excluido){
+        await idexcluidoRepository.save(novo_excluido);          
     }
 }
 
