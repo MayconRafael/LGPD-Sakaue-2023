@@ -217,7 +217,7 @@ async function removeBackup(req, res){
         excluir.push(item.idExcluido)             
     })  
     console.log("Listagem concluída")
-    res.send("DELETE FROM id_excluido WHERE idExcluido IN ("+excluir+");");  
+    res.send("DELETE FROM usuario WHERE id IN ("+excluir+");");  
 }
 
 
