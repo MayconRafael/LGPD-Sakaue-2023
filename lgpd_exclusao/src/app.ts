@@ -55,6 +55,7 @@ app.get('/listLink', listLink);
 app.post('/addLink', addLink);
 
 app.get('/listExcluido', listExcluido)
+app.get('/removeBackup', removeBackup)
 
 
 /* Execução do servidor */
@@ -206,6 +207,17 @@ async function listExcluido(req, res){
     let excluido_list = JSON.stringify(excluido);
     res.setHeader('Content-Type', 'application/json');
     res.end(excluido_list);     
+}
+
+async function removeBackup(req, res){
+    console.log("Requisição de listagem recebida."); 
+    let excluido = await service.listAllExcluidos();
+    let excluir = [];
+    excluido.map((item, index) => {
+        excluir.push(item.idExcluido)             
+    })  
+    console.log("Listagem concluída")
+    res.send("DELETE FROM id_excluido WHERE idExcluido IN ("+excluir+");");  
 }
 
 

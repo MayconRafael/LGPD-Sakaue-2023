@@ -7,6 +7,6 @@ export class IDExcluido {
     id: number
 
     @Column()
-    idExcluido: string
+    idExcluido: number
 
 }
