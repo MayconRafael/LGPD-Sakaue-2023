@@ -1,1 +1,1 @@
-mariadb -u root -p backup < bkp_exclusao.sql
+mariadb -u root --password=root exclusao < bkp_exclusao.sql
